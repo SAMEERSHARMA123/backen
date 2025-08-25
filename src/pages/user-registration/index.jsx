@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
+import { useNavigate } from 'react-router-dom';
 import Icon from '../../components/AppIcon';
 import RegistrationForm from './components/RegistrationForm';
 import SocialAuthButtons from './components/SocialAuthButtons';
@@ -9,6 +10,7 @@ import TrustSignals from './components/TrustSignals';
 const UserRegistration = () => {
   const [loading, setLoading] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setMounted(true);
@@ -37,7 +39,7 @@ const UserRegistration = () => {
         // Store user data in localStorage
         localStorage.setItem('user', JSON.stringify(data.user));
         // Navigate to dashboard or show success message
-        window.location.href = '/quiz-dashboard';
+        navigate('/quiz-dashboard');
       } else {
         throw new Error(data.message || 'Registration failed');
       }
